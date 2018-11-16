@@ -1,7 +1,7 @@
 function [ z ] = graphris(t, m, v, h, force, a, alpha, vx, s )
 fprintf("Построение");
 
-figure('Name', 'Зависимость массы ракеты от времени', 'NumberTitle', 'off');
+gcf = figure('Name', 'Зависимость массы ракеты от времени', 'NumberTitle', 'off');
 hold on;
 grid on;
 plot(t, m);
@@ -11,8 +11,9 @@ xlabel('Время, с');
 ylabel('Масса, кг');
 legend('Масса от времени', 'Момент отделения первой ступени', 'Момент отделения второй ступени');
 title('Зависимость массы ракеты от времени');
+saveas(gcf,'Mass.png')
 
-figure('Name', 'Зависимость вертикальной скорости ракеты от времени', 'NumberTitle', 'off');
+gcf = figure('Name', 'Зависимость вертикальной скорости ракеты от времени', 'NumberTitle', 'off');
 hold on;
 grid on;
 plot(t, v);
@@ -20,29 +21,33 @@ xlabel('Время, с');
 ylabel('Скорость, м/с');
 legend('Вертикальная скорость');
 title('Зависимость вертикальной скорости ракеты от времени');
+saveas(gcf,'Vert.png')
 
-figure('Name', 'Зависимость высоты ракеты от времени', 'NumberTitle', 'off');
+gcf = figure('Name', 'Зависимость высоты ракеты от времени', 'NumberTitle', 'off');
 plot(t, h);
 xlabel('Время, с');
 ylabel('Высота, м');
 legend('Высота');
 title('Зависимость высоты ракеты от времени');
+saveas(gcf,'Att.png')
 
-figure('Name', 'Зависимость силы тяги ракеты от времени', 'NumberTitle', 'off');
+gcf = figure('Name', 'Зависимость силы тяги ракеты от времени', 'NumberTitle', 'off');
 plot(t, force);
 xlabel('Время, с');
 ylabel('Сила, Н');
 legend('Тяга');
 title('Зависимость силы тяги ракеты от времени');
+saveas(gcf,'Force.png')
 
-figure('Name', 'Зависимость ускорения ракеты от времени', 'NumberTitle', 'off');
+gcf = figure('Name', 'Зависимость ускорения ракеты от времени', 'NumberTitle', 'off');
 plot(t, a);
 xlabel('Время, с');
 ylabel('Ускорение, м/с^2');
 legend('Ускорение');
 title('Зависимость ускорения ракеты от времени');
+saveas(gcf,'Uskor.png')
 
-figure('Name', 'Зависимость угла тангажа ракеты от времени', 'NumberTitle', 'off');
+gcf = figure('Name', 'Зависимость угла тангажа ракеты от времени', 'NumberTitle', 'off');
 hold on;
 grid on;
 plot(t, alpha, 'Color', 'red');
@@ -50,20 +55,23 @@ legend('Угол ракеты');
 xlabel('Время, с');
 ylabel('Угол, рад');
 title('Зависимость угла тангажа ракеты от времени');
+saveas(gcf,'Tangasch.png')
 
-figure('Name', 'Зависимость горизонтальной скорости ракеты от времени', 'NumberTitle', 'off');
+gcf = figure('Name', 'Зависимость горизонтальной скорости ракеты от времени', 'NumberTitle', 'off');
 plot(t, vx);
 legend('Горизонтальная скорость');
 xlabel('Время, с');
 ylabel('Скорость, м/с');
 title('Зависимость горизонтальной скорости ракеты от времени');
+saveas(gcf,'Vgor.png')
 
-figure('Name', 'Траектория', 'NumberTitle', 'off');
+gcf = figure('Name', 'Траектория', 'NumberTitle', 'off');
 plot(s, h, '--', 'Color', 'red');
 legend('Траектория ракеты');
 xlabel('Расстояние, м');
 ylabel('Высота, м');
 title('Траектория ракеты');
+saveas(gcf,'Traektoria.png')
 z = 1;
 
 end
