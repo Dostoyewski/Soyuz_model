@@ -12,6 +12,7 @@ H = 200000;
 sprev = 0;
 vref = H/526;
 vxprev = 0;
+cycle = 0;
 
 % --Моделирование--
 for i = 0:step:526
@@ -44,25 +45,24 @@ for i = 0:step:526
     h(n) = hprev + v(n) * step;
     s(n) = sprev + vx(n) * step;
     
+    %--Регулятор угла--
+    theta_cmd(n) = ((vref - v(n)) * 0.158 + ay(n) * 0.01) * 0.27;
+    if(theta_cmd(n) < 0)
+        theta_cmd(n) = 0;
+    elseif(theta_cmd(n) > pi/2)
+        theta_cmd(n) = pi/2;
+    end
+    pangle = theta_cmd(n);
+    
     %Обновление значений
     vprev = v(n);
     vxprev = vx(n);
     sprev = s(n);
     hprev = h(n);
     
-    %--Регулятор угла--
-    if(v(n) > vref && pangle > 0)
-        pangle = pangle - 0.01 * pi;
-    end
-    if(v(n) < vref && pangle < pi/2)
-       pangle = pangle + 0.01 * pi; 
-    end
     angle(n) = pangle;
-    alpha(n) = asin(m(n) * g / force(n));
+    alpha(n) = v(n) - vref;
+    
     
 end
-
-% figure
-% plot(t, alpha);
-
 graphris(t, m, v, h, force, ay, angle, vx, s);
