@@ -60,9 +60,6 @@ for i = 0:step:526
     sprev = s(n);
     hprev = h(n);
     
-    angle(n) = pangle;
-    alpha(n) = v(n) - vref;
-    
     
 end
-graphris(t, m, v, h, force, ay, angle, vx, s);
+graphris(t, m, v, h, force, ay, theta_cmd, vx, s);
