@@ -29,8 +29,11 @@ for i = 0:step:526
     m(n) = mass(i);                 %масса
     force(n) = tforce(hprev);       %сила тяги
     
+    %--Ускорение свободного падения от высоты--
+    g = gh(hprev);
+    
     %Расчет ускорений
-    ay(n) = (k*force(n) * sin(pangle) - m(n)*9.81)/m(n);
+    ay(n) = (k*force(n) * sin(pangle) - m(n)*g)/m(n);
     ax(n) = (k*force(n) * cos(pangle))/m(n);
     
     %Расчет скоростей
@@ -55,6 +58,11 @@ for i = 0:step:526
        pangle = pangle + 0.01 * pi; 
     end
     angle(n) = pangle;
+    alpha(n) = asin(m(n) * g / force(n));
+    
 end
+
+% figure
+% plot(t, alpha);
 
 graphris(t, m, v, h, force, ay, angle, vx, s);
